@@ -24,3 +24,19 @@ Widget text14Normal(
       style:
           TextStyle(color: color, fontSize: 14, fontWeight: FontWeight.normal));
 }
+
+Widget textUnderline({String text = "Your Text"}) {
+  return GestureDetector(
+    onTap: () {},
+    child: Text(
+      text,
+      style: TextStyle(
+        fontWeight: FontWeight.normal,
+        fontSize: 12,
+        color: AppColors.primaryText,
+        decoration: TextDecoration.underline,
+        decorationColor: AppColors.primaryText,
+      ),
+    ),
+  );
+}
