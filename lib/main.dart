@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tutorialapp/pages/sigin_in/sign_in.dart';
+import 'package:tutorialapp/pages/sign_up/sign_up.dart';
 import 'package:tutorialapp/pages/welcome/welcome.dart';
 
 void main() {
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         "/": (context) => Welcome(),
-        "signIn": (context) => SignIn(), // the name of the function
+        "signIn": (context) => SignIn(),
+        "/register": (context) => SignUp(), // the name of the function
       },
     );
   }

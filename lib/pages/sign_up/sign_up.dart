@@ -7,8 +7,8 @@ import 'package:tutorialapp/common/widgets/button_widget.dart';
 import 'package:tutorialapp/common/widgets/text_widgets.dart';
 import 'package:tutorialapp/pages/sigin_in/widgets/sign_in_widget.dart';
 
-class SignIn extends StatelessWidget {
-  const SignIn({Key? key}) : super(key: key);
+class SignUp extends StatelessWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,50 +22,64 @@ class SignIn extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                //top login button
-                thirdPartyLogin(),
-                //more login option message
+                SizedBox(height: 30),
                 Center(
-                  child:
-                      text14Normal(text: "Or use your email account to login"),
+                  child: text14Normal(
+                      text: "Enter your details below and signup for free"),
                 ),
                 SizedBox(height: 50),
+                //username section
+                appTextField(
+                  text: "Username",
+                  iconName: "assets/icons/user.png",
+                  hintText: "username",
+                ),
+                SizedBox(height: 20),
                 //email text box
                 appTextField(
                     text: "Email",
                     iconName: "assets/icons/user.png",
-                    hintText: "kindly enter your email address"),
+                    hintText: "Email"),
                 SizedBox(height: 20),
                 //password text box
                 appTextField(
                   text: "Password",
                   iconName: "assets/icons/lock.png",
-                  hintText: "kindly enter your password",
+                  hintText: "password",
+                  obscureText: true,
+                ),
+                //confirm password
+                SizedBox(height: 20),
+                //password text box
+                appTextField(
+                  text: "Confirm password",
+                  iconName: "assets/icons/lock.png",
+                  hintText: "Confirm password",
                   obscureText: true,
                 ),
                 //lets add space to the code
                 SizedBox(
                   height: 20,
                 ),
-                //forgot password
                 Container(
-                  margin: EdgeInsets.only(left: 25),
-                  child: textUnderline(text: "forgot your password ?"),
-                ),
-                SizedBox(height: 80),
+                    margin: EdgeInsets.only(left: 25),
+                    child: text14Normal(
+                        text:
+                            "By creating an account you are agreeing to the terms and conditions")),
+
+                SizedBox(height: 50),
                 //login button
-                Center(child: appButton(buttonName: "Login")),
-                //app register button
-                SizedBox(height: 20),
                 Center(
-                    child: appButton(
-                  buttonName: "Register",
-                  isLogin: false,
-                  context: context,
-                  func: () {
-                    Navigator.pushNamed(context, "/register");
-                  }, // this func has been passed in the appButton section
-                )),
+                  child: appButton(
+                    buttonName: "Register",
+                    isLogin: true,
+                    context: context,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                //app register button
               ],
             ),
           ),

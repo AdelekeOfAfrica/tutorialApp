@@ -1,28 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tutorialapp/common/utilities/app_colors.dart';
+import 'package:tutorialapp/common/widgets/app_bar.dart';
 import 'package:tutorialapp/common/widgets/app_shadow.dart';
 import 'package:tutorialapp/common/widgets/text_widgets.dart';
 import 'package:tutorialapp/pages/sigin_in/widgets/sign_in_widget.dart';
+import 'package:tutorialapp/pages/sign_up/sign_up.dart';
 
-Widget appButton(
-    {double width = 325,
-    double height = 50,
-    String buttonName = "",
-    bool isLogin = true,
-    BuildContext? context}) {
+Widget appButton({
+  double width = 325,
+  double height = 50,
+  String buttonName = "",
+  bool isLogin = true,
+  BuildContext? context,
+  void Function()? func,
+}) {
   return GestureDetector(
     onTap: () {
-      Navigator.push(
-          context!,
-          MaterialPageRoute(
-            builder: (context) => Scaffold(
-              appBar: buildAppbar(),
-              body: Container(
-                color: Colors.white,
-              ),
-            ),
-          ));
+      if (func == null) {
+        print("This handler is null");
+      } else {
+        func();
+      }
     },
     child: Container(
       width: 325,
