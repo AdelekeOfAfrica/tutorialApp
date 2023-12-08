@@ -4,7 +4,7 @@ import 'package:tutorialapp/common/utilities/app_colors.dart';
 import 'package:tutorialapp/common/widgets/text_widgets.dart';
 
 // preferred widget for app bar
-AppBar buildAppbar() {
+AppBar buildAppbar({String title = ""}) {
   return AppBar(
     backgroundColor: Colors.white,
     bottom: PreferredSize(
@@ -14,7 +14,7 @@ AppBar buildAppbar() {
         height: 1,
       ),
     ),
-    title: Center(
-        child: text16Normal(text: "Log In", color: AppColors.primaryText)),
+    title:
+        Center(child: text16Normal(text: title, color: AppColors.primaryText)),
   );
 }

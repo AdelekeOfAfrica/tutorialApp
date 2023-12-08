@@ -3,13 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:tutorialapp/common/widgets/app_shadow.dart';
 import 'package:tutorialapp/common/widgets/image_widget.dart';
 import 'package:tutorialapp/common/widgets/text_widgets.dart';
+import 'package:tutorialapp/pages/sign_up/notifier/register_notifier.dart';
 
-Widget appTextField({
-  String text = "",
-  String iconName = "",
-  String hintText = "Type in your info",
-  bool obscureText = false,
-}) {
+Widget appTextField(
+    {String text = "",
+    String iconName = "",
+    String hintText = "Type in your info",
+    bool obscureText = false,
+    void Function(String value)? func}) {
+  //declearing a function that can be used
   return Container(
     padding: EdgeInsets.only(left: 25, right: 25),
     child: Column(
@@ -32,6 +34,8 @@ Widget appTextField({
                 width: 280,
                 height: 50,
                 child: TextField(
+                  //updating your  textfield
+                  onChanged: (value) => func!(value),
                   keyboardType: TextInputType.multiline,
                   decoration: InputDecoration(
                     hintText: hintText,
@@ -51,7 +55,7 @@ Widget appTextField({
                       borderSide: BorderSide(color: Colors.transparent),
                     ),
                   ),
-                  onChanged: (value) {},
+
                   maxLines: 1,
                   autocorrect: false,
                   // by default it is false

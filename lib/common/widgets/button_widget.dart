@@ -16,13 +16,7 @@ Widget appButton({
   void Function()? func,
 }) {
   return GestureDetector(
-    onTap: () {
-      if (func == null) {
-        print("This handler is null");
-      } else {
-        func();
-      }
-    },
+    onTap: func,
     child: Container(
       width: 325,
       height: 56,
