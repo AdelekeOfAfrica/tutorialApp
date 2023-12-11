@@ -1,10 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tutorialapp/firebase_options.dart';
 import 'package:tutorialapp/pages/sigin_in/sign_in.dart';
 import 'package:tutorialapp/pages/sign_up/sign_up.dart';
 import 'package:tutorialapp/pages/welcome/welcome.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const ProviderScope(child: MyApp()));
 }
 
