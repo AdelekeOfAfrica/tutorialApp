@@ -6,7 +6,8 @@ import 'package:tutorialapp/common/widgets/text_widgets.dart';
 import 'package:tutorialapp/pages/sign_up/notifier/register_notifier.dart';
 
 Widget appTextField(
-    {String text = "",
+    {TextEditingController? controller,
+    String text = "",
     String iconName = "",
     String hintText = "Type in your info",
     bool obscureText = false,
@@ -35,6 +36,7 @@ Widget appTextField(
                 height: 50,
                 child: TextField(
                   //updating your  textfield
+                  controller: controller,
                   onChanged: (value) => func!(value),
                   keyboardType: TextInputType.multiline,
                   decoration: InputDecoration(
