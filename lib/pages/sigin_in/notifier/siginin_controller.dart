@@ -1,10 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tutorialapp/common/entities/entities.dart';
 import 'package:tutorialapp/common/global_loader/global_loader.dart';
+import 'package:tutorialapp/common/utilities/constants.dart';
 import 'package:tutorialapp/common/widgets/popup_messages.dart';
+import 'package:tutorialapp/global.dart';
+import 'package:tutorialapp/pages/application/application.dart';
 import 'package:tutorialapp/pages/sigin_in/notifier/signin_notifier.dart';
 
 class SignInController {
@@ -74,7 +78,9 @@ class SignInController {
         loginRequestEntity.open_id = id;
         loginRequestEntity.type = 1;
         asyncPostAllData(loginRequestEntity);
-        print("user logged in");
+        if (kDebugMode) {
+          print("user logged in");
+        }
       } else {
         toastInfo("login error");
       }
@@ -101,7 +107,22 @@ class SignInController {
     // ref.read(appLoaderProvider.notifier).setLoaderValue(false);
 
     //we need to talk to server
+
     //have local storage
+    try {
+      var navigator = Navigator.of(ref.context);
+      //try to remember user info
+      global.storageService
+          .setString(AppConstants.STORAGE_USER_PROFILE_KEY, "123");
+      global.storageService.setString(
+          AppConstants.STORAGE_USER_TOKEN_KEY, "africa_2023"); //your password
+
+      navigator.pushNamedAndRemoveUntil(
+          "/application",
+          (route) =>
+              false); //this is the right one , it ensures you login first before you access the login page
+    } catch (e) {}
+
     //redirect to new page
   }
 }

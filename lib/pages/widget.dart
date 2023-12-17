@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:tutorialapp/common/utilities/constants.dart';
 import 'package:tutorialapp/common/widgets/text_widgets.dart';
 import 'package:tutorialapp/common/widgets/app_shadow.dart';
+import 'package:tutorialapp/global.dart';
 import 'package:tutorialapp/pages/sigin_in/sign_in.dart';
 
 Widget onBoardingPage(
@@ -46,7 +48,11 @@ Widget _nextButton(index, PageController controller, BuildContext context) {
         //     MaterialPageRoute(
         //         builder: (BuildContext context) => const SignIn())); //first way you can use to access the portal
 
-        Navigator.pushNamed(context, "signIn");
+//to remember if we are first time or not
+        global.storageService
+            .setBool(AppConstants.STORAGE_DEVICE_OPEN_FIRST_KEY, true);
+        Navigator.pushNamed(
+            context, "signIn"); // this is being fetched from the storage.dart
       }
     },
     child: Container(

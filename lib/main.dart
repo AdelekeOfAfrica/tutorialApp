@@ -1,16 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tutorialapp/common/routes/routes.dart';
 import 'package:tutorialapp/firebase_options.dart';
+import 'package:tutorialapp/global.dart';
+import 'package:tutorialapp/pages/application/application.dart';
 import 'package:tutorialapp/pages/sigin_in/sign_in.dart';
 import 'package:tutorialapp/pages/sign_up/sign_up.dart';
 import 'package:tutorialapp/pages/welcome/welcome.dart';
+import 'global.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await global.init();
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -27,11 +29,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       initialRoute: "/",
-      routes: {
-        "/": (context) => Welcome(),
-        "signIn": (context) => SignIn(),
-        "/register": (context) => SignUp(), // the name of the function
-      },
+
+      // onGenerateRoute: () => RandomeFunction(),
+      onGenerateRoute: (settings) => AppPages.generateRouteSettings(settings),
     );
   }
 }
