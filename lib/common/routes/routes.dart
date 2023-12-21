@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tutorialapp/common/routes/app_routes_name.dart';
 import 'package:tutorialapp/global.dart';
 import 'package:tutorialapp/pages/application/application.dart';
+import 'package:tutorialapp/pages/home/view/home.dart';
 import 'package:tutorialapp/pages/sigin_in/sign_in.dart';
 import 'package:tutorialapp/pages/sign_up/sign_up.dart';
 import 'package:tutorialapp/pages/welcome/welcome.dart';
@@ -14,12 +15,13 @@ class AppPages {
       RouteEntity(path: AppRoutesNames.Signin, page: const SignIn()),
       RouteEntity(path: AppRoutesNames.register, page: const SignUp()),
       RouteEntity(path: AppRoutesNames.Homepage, page: const Application()),
+      RouteEntity(path: AppRoutesNames.Home, page: const Home()),
     ];
   }
 
   static MaterialPageRoute generateRouteSettings(RouteSettings settings) {
     if (kDebugMode) {
-      print("clicked route ${settings.name}");
+      // print("clicked route ${settings.name}");
     }
 
     if (settings.name != null) {
@@ -43,7 +45,7 @@ class AppPages {
           }
         } else {
           if (kDebugMode) {
-            print("app ran first time ");
+            // print("app ran first time ");
           }
 
           return MaterialPageRoute(

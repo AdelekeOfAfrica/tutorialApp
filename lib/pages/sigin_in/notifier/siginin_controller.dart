@@ -1,9 +1,11 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tutorialapp/common/entities/entities.dart';
+import 'package:tutorialapp/common/Models/entities.dart';
 import 'package:tutorialapp/common/global_loader/global_loader.dart';
 import 'package:tutorialapp/common/utilities/constants.dart';
 import 'package:tutorialapp/common/widgets/popup_messages.dart';
@@ -112,8 +114,13 @@ class SignInController {
     try {
       var navigator = Navigator.of(ref.context);
       //try to remember user info
-      global.storageService
-          .setString(AppConstants.STORAGE_USER_PROFILE_KEY, "123");
+      global.storageService.setString(
+          AppConstants.STORAGE_USER_PROFILE_KEY,
+          jsonEncode({
+            'name': 'Michael',
+            'email': 'adelekeofafrica@gmail.com',
+            'age': 34
+          })); // i have removed the 123 that is there before;
       global.storageService.setString(
           AppConstants.STORAGE_USER_TOKEN_KEY, "africa_2023"); //your password
 

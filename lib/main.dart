@@ -14,6 +14,7 @@ import 'global.dart';
 Future<void> main() async {
   await global.init();
   runApp(const ProviderScope(child: MyApp()));
+  final GlobalKey<NavigatorState> navkey = GlobalKey<NavigatorState>();
 }
 
 class MyApp extends StatelessWidget {
