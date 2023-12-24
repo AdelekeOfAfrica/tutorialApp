@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tutorialapp/common/utilities/app_colors.dart';
 import 'package:tutorialapp/common/utilities/constants.dart';
 import 'package:tutorialapp/common/widgets/app_bar.dart';
+import 'package:tutorialapp/common/widgets/image_widget.dart';
 import 'package:tutorialapp/common/widgets/search_widget.dart';
 import 'package:tutorialapp/common/widgets/text_widgets.dart';
 import 'package:tutorialapp/global.dart';
@@ -58,6 +59,25 @@ class _HomeState extends ConsumerState<Home> {
                     controller:
                         _controller), //we are passing ref into the banners
                 const HomeMenuBar(),
+                const CourseItemGrid(),
+                // CustomScrollView(
+                //     physics:
+                //         const ScrollPhysics(), //this handle the scrolling of the page
+                //     shrinkWrap: true,
+                // slivers: [
+                // SliverPadding(
+                //   padding: EdgeInsets.all(20),
+                // sliver: SliverGrid.count(
+                // crossAxisCount:
+                //   2, // this displays the nurmber of grid box given
+                //crossAxisSpacing: 40, // adding of spaces
+                //children: const [
+                // Text("physics"),
+                // Text("chemistry"),
+                //Text("Geography"),
+                //],
+                //)),
+                //]),
               ],
             ),
           ),

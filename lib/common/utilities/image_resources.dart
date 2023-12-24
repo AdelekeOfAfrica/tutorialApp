@@ -17,4 +17,5 @@ class ImageRes {
   static const String man = 'assets/images/man.png';
   static const String boy = 'assets/images/boy.png';
   static const String menu = "$_imageBase/menu.png";
+  static const String profileImage = "$_imageBase/default.png";
 }
