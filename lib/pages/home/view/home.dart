@@ -1,20 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tutorialapp/common/utilities/app_colors.dart';
 import 'package:tutorialapp/common/utilities/constants.dart';
 import 'package:tutorialapp/common/widgets/app_bar.dart';
 import 'package:tutorialapp/common/widgets/search_widget.dart';
 import 'package:tutorialapp/common/widgets/text_widgets.dart';
 import 'package:tutorialapp/global.dart';
+import 'package:tutorialapp/pages/home/controller/home_controller.dart';
 import 'package:tutorialapp/pages/home/view/widgets/home_widgets.dart';
 
-class Home extends StatelessWidget {
+class Home extends ConsumerStatefulWidget {
   const Home({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  ConsumerState<Home> createState() => _HomeState();
+}
+
+class _HomeState extends ConsumerState<Home> {
+  late PageController _controller;
+  // @override
+  // void initState() {
+  //   //Todo : implement initState
+  //   super.initState();
+  // }  this only load the first state, it does not care if dependency changes
+
+  @override
+  void didChangeDependencies() {
+    //todo: implement didchangedependencies
+    _controller =
+        PageController(initialPage: ref.watch(homeScreenBannerDotsProvider));
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(
+    BuildContext context,
+  ) {
     return Scaffold(
-        appBar: buildAppbar(title: "home"),
+        backgroundColor: Colors.white,
+        appBar: homeAppbar(),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 25),
           child: SingleChildScrollView(
@@ -22,10 +47,17 @@ class Home extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                helloText(),
-                userName(),
+                SizedBox(height: 20),
+                const HelloText(),
+                const UserName(),
                 SizedBox(height: 20),
                 searchBar(),
+                SizedBox(height: 20),
+                HomeBanner(
+                    ref: ref,
+                    controller:
+                        _controller), //we are passing ref into the banners
+                const HomeMenuBar(),
               ],
             ),
           ),

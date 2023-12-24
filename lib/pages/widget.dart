@@ -6,6 +6,48 @@ import 'package:tutorialapp/common/widgets/app_shadow.dart';
 import 'package:tutorialapp/global.dart';
 import 'package:tutorialapp/pages/sigin_in/sign_in.dart';
 
+class AppOnBoardingPage extends StatelessWidget {
+  final PageController controller;
+  final String imagePath;
+  final String title;
+  final String subtitle;
+  final index;
+  final BuildContext context;
+
+  const AppOnBoardingPage({
+    super.key,
+    required this.controller,
+    required this.imagePath,
+    required this.title,
+    required this.subtitle,
+    required this.index,
+    required this.context,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    print("inside AppOnBoardingPage class");
+    return Column(
+      children: [
+        Image.asset(
+          imagePath,
+          fit: BoxFit.fitWidth,
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 15),
+          child: text24Normal(text: title),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 15),
+          padding: EdgeInsets.only(left: 30, right: 30),
+          child: Text16Normal(text: subtitle),
+        ),
+        _nextButton(index, controller, context as BuildContext),
+      ],
+    );
+  }
+}
+
 Widget onBoardingPage(
   PageController controller, {
   String imagePath = "assets/images/reading.png",
@@ -29,7 +71,7 @@ Widget onBoardingPage(
       Container(
         margin: EdgeInsets.only(top: 15),
         padding: EdgeInsets.only(left: 30, right: 30),
-        child: text16Normal(text: subtitle),
+        child: Text16Normal(text: subtitle),
       ),
       _nextButton(index, controller, context as BuildContext),
     ],
@@ -61,7 +103,7 @@ Widget _nextButton(index, PageController controller, BuildContext context) {
       height: 50,
       decoration: appBoxShadow(),
       child: Center(
-        child: text16Normal(text: "Next", color: Colors.white),
+        child: Text16Normal(text: "Next", color: Colors.white),
       ),
     ),
   );

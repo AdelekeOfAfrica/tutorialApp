@@ -53,7 +53,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                     children: [
                       SizedBox(height: 30),
                       Center(
-                        child: text14Normal(
+                        child: const Text14Normal(
                             text:
                                 "Enter your details below and signup for free"),
                       ),
@@ -109,7 +109,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                       ),
                       Container(
                           margin: EdgeInsets.only(left: 25),
-                          child: text14Normal(
+                          child: const Text14Normal(
                               text:
                                   "By creating an account you are agreeing to the terms and conditions")),
 

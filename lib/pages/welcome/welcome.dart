@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tutorialapp/common/utilities/image_resources.dart';
 import 'package:tutorialapp/common/widgets/text_widgets.dart';
 import 'package:tutorialapp/pages/widget.dart';
 
@@ -36,9 +37,9 @@ class Welcome extends ConsumerWidget {
                   scrollDirection: Axis.horizontal,
                   children: [
                     // first page
-                    onBoardingPage(
-                      _controller,
-                      imagePath: "assets/images/reading.png",
+                    AppOnBoardingPage(
+                      controller: _controller,
+                      imagePath: ImageRes.reading,
                       title: "Get your online certificate",
                       subtitle:
                           "Why go to a physical university,when you can get your certificate online ",
@@ -48,17 +49,18 @@ class Welcome extends ConsumerWidget {
                     ),
 
                     //second page
-                    onBoardingPage(_controller,
-                        imagePath: "assets/images/man.png",
+                    AppOnBoardingPage(
+                        controller: _controller,
+                        imagePath: ImageRes.man,
                         title: "Here at test university",
                         subtitle:
                             "we give you the oppurtunity to test our services and you will see how beautiful our system is",
                         index: 2,
                         context: context),
 
-                    onBoardingPage(
-                      _controller,
-                      imagePath: "assets/images/boy.png",
+                    AppOnBoardingPage(
+                      controller: _controller,
+                      imagePath: ImageRes.boy,
                       title: "Education is key",
                       subtitle:
                           "Anywhere, any time, the time is at your discretion ",

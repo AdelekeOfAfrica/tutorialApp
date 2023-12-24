@@ -49,7 +49,7 @@ class _SignInState extends ConsumerState<SignIn> {
                       thirdPartyLogin(),
                       //more login option message
                       Center(
-                        child: text14Normal(
+                        child: const Text14Normal(
                             text: "Or use your email account to login"),
                       ),
                       SizedBox(height: 50),

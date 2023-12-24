@@ -18,7 +18,7 @@ Widget appTextField(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        text14Normal(text: text),
+        Text14Normal(text: text),
         SizedBox(height: 5),
         Container(
             width: 325,
@@ -32,7 +32,7 @@ Widget appTextField(
                 child: AppImage(imagePath: iconName),
               ),
               //our text field
-              appTextField(
+              appTextFieldOnly(
                 controller: controller,
                 hintText: hintText,
                 func: func,
