@@ -124,18 +124,58 @@ class HomeMenuBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          Container(
-            child: const Text16Normal(
-              text: "choose your course",
-              color: AppColors.primaryText,
-              fontWeight: FontWeight.bold,
-            ),
+    return Column(
+      children: [
+        // see all course
+        Container(
+          margin: EdgeInsets.only(top: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              const Text16Normal(
+                text: "choose your course",
+                color: AppColors.primaryText,
+                fontWeight: FontWeight.bold,
+              ),
+              GestureDetector(
+                child: const Text10Normal(
+                  text: "see all",
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+        //end of see all course
+
+        //course item button
+        SizedBox(
+          height: 20,
+        ),
+        Row(
+          children: [
+            Container(
+              decoration:
+                  appBoxShadow(color: AppColors.primaryElement, radius: 7.3),
+              padding: EdgeInsets.only(left: 15, right: 15, top: 5, bottom: 5),
+              child: Text11Normal(text: "All"),
+            ),
+            Container(
+                margin: EdgeInsets.only(left: 30),
+                child: const Text11Normal(
+                  text: "Popular",
+                  color: AppColors.primaryThreeElementText,
+                )),
+            Container(
+                margin: EdgeInsets.only(left: 30),
+                child: const Text11Normal(
+                  text: "Newest",
+                  color: AppColors.primaryThreeElementText,
+                )),
+          ],
+        ),
+        //end of course item button
+      ],
     );
   }
 }
