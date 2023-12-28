@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tutorialapp/common/routes/routes.dart';
+import 'package:tutorialapp/common/services/http_util.dart';
 import 'package:tutorialapp/firebase_options.dart';
 import 'package:tutorialapp/global.dart';
 import 'package:tutorialapp/pages/application/application.dart';
@@ -13,9 +14,19 @@ import 'global.dart';
 
 Future<void> main() async {
   await global.init();
+
+  // HttpUtil().post("api/login", queryParameters: {
+  //   "name": "adelekeofafrica",
+  //   "email": "adelekeofafrica@gmail.com",
+  //   "avatar": "uploads/01.png",
+  //   "open_id": "M6uvmsbFBRSK6wwoD0nNBpwe0QM2",
+  //   "type": 1
+  // });
+
   runApp(const ProviderScope(child: MyApp()));
-  final GlobalKey<NavigatorState> navkey = GlobalKey<NavigatorState>();
 }
+
+final GlobalKey<NavigatorState> navkey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -25,6 +36,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      navigatorKey: navkey,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,

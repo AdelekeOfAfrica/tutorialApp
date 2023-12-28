@@ -19,6 +19,11 @@ class StorageService {
     return _pref.getString(key) ?? "";
   }
 
+  //storing our user token from the backend
+  String getUserToken() {
+    return _pref.getString(AppConstants.STORAGE_USER_TOKEN_KEY) ?? "";
+  }
+
   Future<bool> setBool(String key, bool value) async {
     return await _pref.setBool(key, value);
   }

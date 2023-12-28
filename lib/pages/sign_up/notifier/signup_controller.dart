@@ -66,6 +66,9 @@ class SignUpController {
           await credencial.user?.sendEmailVerification();
           await credencial.user
               ?.updateDisplayName(name); // this name is  assigned to username
+
+          String photoURL = "uploads/01.png";
+          await credencial.user?.updatePhotoURL(photoURL);
           //get server photo url
           //get user photo url
 

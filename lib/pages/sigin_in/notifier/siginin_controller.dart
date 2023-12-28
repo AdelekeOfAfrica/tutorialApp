@@ -7,22 +7,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tutorialapp/common/Models/entities.dart';
 import 'package:tutorialapp/common/global_loader/global_loader.dart';
+import 'package:tutorialapp/common/services/http_util.dart';
 import 'package:tutorialapp/common/utilities/constants.dart';
 import 'package:tutorialapp/common/widgets/popup_messages.dart';
 import 'package:tutorialapp/global.dart';
+import 'package:tutorialapp/main.dart';
 import 'package:tutorialapp/pages/application/application.dart';
 import 'package:tutorialapp/pages/sigin_in/notifier/signin_notifier.dart';
+import 'package:tutorialapp/pages/sigin_in/repo/signin_repo.dart';
 
 class SignInController {
   // late BuildContext context;
-  WidgetRef ref;
+  // WidgetRef ref;
 
-  SignInController(this.ref);
+  SignInController();
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Future<void> handleSignIn() async {
+  Future<void> handleSignIn(WidgetRef ref) async {
     var state = ref.read(signInNotifierProvider);
     String email = state.email;
     String password = state.password;
@@ -47,10 +50,10 @@ class SignInController {
     print("0");
 
     try {
-      final credencial = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      final credencial = await SignInRepo.firebaseSignIn(email, password);
+
       //debuging terms
-      print("1");
+      // print("1");
 
       if (credencial.user == null) {
         toastInfo("User not found");
@@ -81,6 +84,7 @@ class SignInController {
         loginRequestEntity.type = 1;
         asyncPostAllData(loginRequestEntity);
         if (kDebugMode) {
+          print("5");
           print("user logged in");
         }
       } else {
@@ -103,33 +107,34 @@ class SignInController {
     ref.read(appLoaderProvider.notifier).setLoaderValue(false);
   }
 
-  void asyncPostAllData(LoginRequestEntity loginRequestEntity) {
-    // ref.read(appLoaderProvider.notifier).setLoaderValue(true);
-
-    // ref.read(appLoaderProvider.notifier).setLoaderValue(false);
-
+  Future<void> asyncPostAllData(LoginRequestEntity loginRequestEntity) async {
     //we need to talk to server
 
-    //have local storage
-    try {
-      var navigator = Navigator.of(ref.context);
-      //try to remember user info
-      global.storageService.setString(
-          AppConstants.STORAGE_USER_PROFILE_KEY,
-          jsonEncode({
-            'name': 'Michael',
-            'email': 'adelekeofafrica@gmail.com',
-            'age': 34
-          })); // i have removed the 123 that is there before;
-      global.storageService.setString(
-          AppConstants.STORAGE_USER_TOKEN_KEY, "africa_2023"); //your password
+    var result = await SignInRepo.login(params: loginRequestEntity);
+    print("$result");
 
-      navigator.pushNamedAndRemoveUntil(
-          "/application",
-          (route) =>
-              false); //this is the right one , it ensures you login first before you access the login page
-    } catch (e) {}
+    if (result.code == 200) {
+      try {
+        //try to remember user info
+        global.storageService.setString(
+            AppConstants.STORAGE_USER_PROFILE_KEY, jsonEncode(result.data));
+        global.storageService.setString(
+            AppConstants.STORAGE_USER_TOKEN_KEY, result.data!.access_token!);
 
-    //redirect to new page
+        navkey.currentState
+            ?.pushNamedAndRemoveUntil("/application", (route) => false);
+      } catch (e) {
+        if (kDebugMode) {
+          print(e.toString());
+        }
+      }
+
+      //redirect to new page
+    } else {
+      toastInfo("Login Error");
+    }
   }
 }
+
+  //have local storage
+
