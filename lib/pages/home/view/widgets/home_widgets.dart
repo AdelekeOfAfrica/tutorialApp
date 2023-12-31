@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tutorialapp/common/utilities/app_colors.dart';
+import 'package:tutorialapp/common/utilities/constants.dart';
 import 'package:tutorialapp/common/utilities/image_resources.dart';
 import 'package:tutorialapp/common/widgets/app_shadow.dart';
 import 'package:tutorialapp/common/widgets/image_widget.dart';
@@ -181,24 +182,35 @@ class HomeMenuBar extends StatelessWidget {
 }
 
 class CourseItemGrid extends StatelessWidget {
-  const CourseItemGrid({super.key});
+  final WidgetRef ref;
+  const CourseItemGrid({super.key, required this.ref});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: GridView.builder(
-        physics: ScrollPhysics(),
-        shrinkWrap: true,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 40,
-          mainAxisSpacing: 40,
-        ),
-        itemCount: 6,
-        itemBuilder: (_, int index) {
-          return AppImage();
+    final courseState = ref.watch(homeCourseListProvider);
+    //passing the fetched data
+    return courseState.when(
+        data: (data) => GridView.builder(
+              physics: ScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
+              ),
+              itemCount: data?.length,
+              itemBuilder: (_, int index) {
+                // return AppImage(); this is for the default image that was hardcoded
+                return AppBoxDecorationImage(
+                    imagePath:
+                        "${AppConstants.IMAGE_UPLOADS_PATH}${data![index].thumbnail!}");
+              },
+            ),
+        error: (error, stackTrace) {
+          print(error.toString());
+          print(stackTrace.toString());
+          return Center(child: Text("Error Loading data ..."));
         },
-      ),
-    );
+        loading: () => const Center(child: Text("Loading...")));
   }
 }

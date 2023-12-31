@@ -59,7 +59,7 @@ class _HomeState extends ConsumerState<Home> {
                     controller:
                         _controller), //we are passing ref into the banners
                 const HomeMenuBar(),
-                const CourseItemGrid(),
+                CourseItemGrid(ref: ref),
                 // CustomScrollView(
                 //     physics:
                 //         const ScrollPhysics(), //this handle the scrolling of the page

@@ -69,7 +69,8 @@ class AppBoxDecorationImage extends StatelessWidget {
       {Key? key,
       this.width = 40,
       this.height = 40,
-      this.imagePath = ImageRes.profile})
+      this.imagePath =
+          ''}) //ImageRes.profile if you want to display default image in your asset folder
       : super(key: key);
 
   @override
@@ -78,10 +79,13 @@ class AppBoxDecorationImage extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.fitHeight,
-          image: AssetImage(imagePath),
-        ),
+        image: imagePath.isNotEmpty
+            ? DecorationImage(
+                fit: BoxFit.fitHeight,
+                image: NetworkImage(
+                    imagePath) //use AssetImage if you are fetching the image from the asset folder,
+                )
+            : null,
         borderRadius: BorderRadius.circular(20),
       ),
     );
