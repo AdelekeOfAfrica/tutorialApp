@@ -73,6 +73,29 @@ class Text11Normal extends StatelessWidget {
   }
 }
 
+class FadeText extends StatelessWidget {
+  final String text;
+  final Color color;
+  final double fontSize;
+
+  const FadeText(
+      {Key? key,
+      this.text = "",
+      this.color = AppColors.primaryElementText,
+      this.fontSize = 10})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Text(text,
+        softWrap: false,
+        maxLines: 1,
+        overflow: TextOverflow.fade,
+        textAlign: TextAlign.left,
+        style: TextStyle(
+            color: color, fontSize: fontSize, fontWeight: FontWeight.bold));
+  }
+}
+
 class Text14Normal extends StatelessWidget {
   final String text;
   final Color color;

@@ -189,28 +189,43 @@ class CourseItemGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final courseState = ref.watch(homeCourseListProvider);
     //passing the fetched data
-    return courseState.when(
-        data: (data) => GridView.builder(
-              physics: ScrollPhysics(),
-              shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 15,
-                mainAxisSpacing: 15,
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 18, horizontal: 0),
+      child: courseState.when(
+          data: (data) => GridView.builder(
+                physics: ScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 15,
+                  mainAxisSpacing: 15,
+                  childAspectRatio: 1.6,
+                ),
+                itemCount: data?.length,
+                itemBuilder: (_, int index) {
+                  // return AppImage(); this is for the default image that was hardcoded
+                  return AppBoxDecorationImage(
+                      imagePath: //AppImage()
+                          "${AppConstants.IMAGE_UPLOADS_PATH}${data![index].thumbnail!}",
+                      fit: BoxFit.fitWidth,
+                      courseItem: data[index],
+                      func: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return Scaffold(
+                              appBar: AppBar(),
+                              body: Center(
+                                  child: Text(data[index].id.toString())));
+                        }));
+                      });
+                },
               ),
-              itemCount: data?.length,
-              itemBuilder: (_, int index) {
-                // return AppImage(); this is for the default image that was hardcoded
-                return AppBoxDecorationImage(
-                    imagePath:
-                        "${AppConstants.IMAGE_UPLOADS_PATH}${data![index].thumbnail!}");
-              },
-            ),
-        error: (error, stackTrace) {
-          print(error.toString());
-          print(stackTrace.toString());
-          return Center(child: Text("Error Loading data ..."));
-        },
-        loading: () => const Center(child: Text("Loading...")));
+          error: (error, stackTrace) {
+            print(error.toString());
+            print(stackTrace.toString());
+            return Center(child: Text("Error Loading data ..."));
+          },
+          loading: () => const Center(child: Text("Loading..."))),
+    );
   }
 }

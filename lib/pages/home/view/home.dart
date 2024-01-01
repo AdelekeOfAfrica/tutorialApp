@@ -39,9 +39,10 @@ class _HomeState extends ConsumerState<Home> {
     BuildContext context,
   ) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: homeAppbar(),
-        body: Padding(
+      backgroundColor: Colors.white,
+      appBar: homeAppbar(),
+      body: RefreshIndicator(
+        child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 25),
           child: SingleChildScrollView(
             child: Column(
@@ -81,6 +82,11 @@ class _HomeState extends ConsumerState<Home> {
               ],
             ),
           ),
-        ));
+        ),
+        onRefresh: () {
+          return ref.refresh(homeCourseListProvider.notifier).fetchCourseList();
+        },
+      ),
+    );
   }
 }

@@ -18,9 +18,9 @@ class HomeScreenBannerDots extends _$HomeScreenBannerDots {
 }
 
 //dont forget to run  flutter pub run build_runner  watch --delete-conflicting-outputs
-@riverpod
+@Riverpod(keepAlive: true)
 class HomeCourseList extends _$HomeCourseList {
-  Future<List<CourseItem>?> _fetchCourseList() async {
+  Future<List<CourseItem>?> fetchCourseList() async {
     //List<CourseItem>is from the course entity model
 
     //calling the model
@@ -35,6 +35,6 @@ class HomeCourseList extends _$HomeCourseList {
 
   @override
   FutureOr<List<CourseItem>?> build() async {
-    return _fetchCourseList(); // this fetch the data first and pass it to the HomeCourseList
+    return fetchCourseList(); // this fetch the data first and pass it to the HomeCourseList
   }
 }

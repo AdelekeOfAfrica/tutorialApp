@@ -15,14 +15,6 @@ import 'global.dart';
 Future<void> main() async {
   await global.init();
 
-  // HttpUtil().post("api/login", queryParameters: {
-  //   "name": "adelekeofafrica",
-  //   "email": "adelekeofafrica@gmail.com",
-  //   "avatar": "uploads/01.png",
-  //   "open_id": "M6uvmsbFBRSK6wwoD0nNBpwe0QM2",
-  //   "type": 1
-  // });
-
   runApp(const ProviderScope(child: MyApp()));
 }
 
