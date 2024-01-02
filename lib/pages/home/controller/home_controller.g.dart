@@ -23,7 +23,7 @@ final homeScreenBannerDotsProvider =
 );
 
 typedef _$HomeScreenBannerDots = Notifier<int>;
-String _$homeCourseListHash() => r'a4dde51c5c43f17da894d5f399eec94d277502ef';
+String _$homeCourseListHash() => r'a0b3f242e14809e43bf4becb4684b0a4cf3225ad';
 
 /// See also [HomeCourseList].
 @ProviderFor(HomeCourseList)

@@ -88,7 +88,7 @@ class AppBoxDecorationImage extends StatelessWidget {
       onTap: func,
       child: Container(
         width: width,
-        height: width,
+        height: height,
         decoration: BoxDecoration(
           image: finalImagePath.isNotEmpty
               ? DecorationImage(

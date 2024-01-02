@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tutorialapp/common/routes/app_routes_name.dart';
 import 'package:tutorialapp/global.dart';
 import 'package:tutorialapp/pages/application/application.dart';
+import 'package:tutorialapp/pages/courseDetails/views/course_detail.dart';
 import 'package:tutorialapp/pages/home/view/home.dart';
 import 'package:tutorialapp/pages/sigin_in/sign_in.dart';
 import 'package:tutorialapp/pages/sign_up/sign_up.dart';
@@ -16,6 +17,8 @@ class AppPages {
       RouteEntity(path: AppRoutesNames.register, page: const SignUp()),
       RouteEntity(path: AppRoutesNames.Homepage, page: const Application()),
       RouteEntity(path: AppRoutesNames.Home, page: const Home()),
+      RouteEntity(
+          path: AppRoutesNames.Course_Details, page: const CourseDetail()),
     ];
   }
 
