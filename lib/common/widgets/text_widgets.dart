@@ -56,7 +56,7 @@ class Text10Normal extends StatelessWidget {
 }
 
 class Text11Normal extends StatelessWidget {
-  final String text;
+  final String? text;
   final Color color;
   final FontWeight fontWeight;
   const Text11Normal(
@@ -67,7 +67,7 @@ class Text11Normal extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Text(text,
+    return Text(text!,
         textAlign: TextAlign.center,
         style: TextStyle(color: color, fontSize: 11, fontWeight: fontWeight));
   }
