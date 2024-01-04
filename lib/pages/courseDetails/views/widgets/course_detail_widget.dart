@@ -131,15 +131,18 @@ class CourseDetailIncludes extends StatelessWidget {
         SizedBox(height: 16),
         CourseInfo(
             imagePath: ImageRes.videoDetail,
-            length: courseItem.video_length.toString()),
+            length: courseItem.video_length.toString(),
+            infoText: "Hours Video"),
         SizedBox(height: 16),
         CourseInfo(
             imagePath: ImageRes.fileDetail,
-            length: courseItem.lesson_num.toString()),
+            length: courseItem.lesson_num.toString(),
+            infoText: "Number of files"),
         SizedBox(height: 16),
         CourseInfo(
             imagePath: ImageRes.downloadDetail,
-            length: courseItem.down_num.toString())
+            length: courseItem.down_num.toString(),
+            infoText: "Number of Items to download")
       ]),
     );
   }
@@ -148,7 +151,12 @@ class CourseDetailIncludes extends StatelessWidget {
 class CourseInfo extends StatelessWidget {
   final String imagePath;
   final String? length;
-  const CourseInfo({super.key, required this.imagePath, this.length});
+  final String? infoText;
+  const CourseInfo(
+      {super.key,
+      required this.imagePath,
+      this.length,
+      this.infoText = "Items"});
 
   @override
   Widget build(BuildContext context) {
@@ -159,9 +167,54 @@ class CourseInfo extends StatelessWidget {
       Container(
           margin: const EdgeInsets.only(left: 10),
           child: Text11Normal(
-              text:
-                  (length == 'null' ? "0 hours video" : "$length hours video"),
+              text: (length == 'null' ? "0 $infoText" : "$length $infoText"),
               color: AppColors.primarySecondaryElementText))
     ]);
+  }
+}
+
+class LessonInfo extends StatelessWidget {
+  const LessonInfo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: const EdgeInsets.only(top: 20),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          const Text16Normal(
+              text: "Lesson List",
+              color: AppColors.primaryText,
+              textAlign: TextAlign.start,
+              fontWeight: FontWeight.bold),
+          const SizedBox(height: 20),
+          Container(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              width: 325,
+              height: 80,
+              decoration: appBoxShadow(
+                  radius: 10,
+                  sR: 2,
+                  bR: 3,
+                  color: Color.fromRGBO(255, 255, 255, 1)),
+              child: InkWell(
+                  onTap: () {},
+                  child: Row(children: [
+                    AppBoxDecorationImage(
+                        width: 60,
+                        height: 60,
+                        imagePath: "${AppConstants.IMAGE_UPLOADS_PATH}01.png"),
+                    SizedBox(width: 8),
+                    const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text13Normal(text: "This is first lesson"),
+                          Text10Normal(text: "This is description"),
+                        ]),
+                    Expanded(child: Container()),
+                    const AppImage(
+                        imagePath: ImageRes.arrowRight, width: 24, height: 24)
+                  ]))),
+        ]));
   }
 }

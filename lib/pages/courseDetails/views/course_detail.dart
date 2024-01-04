@@ -36,33 +36,36 @@ class _CourseDetailState extends ConsumerState<CourseDetail> {
             args.toInt())); //indexs has been passed in the CourseDetailProvider
     print(stateData);
     return Scaffold(
-        appBar: buildGlobalAppbar(title: "Course Detail Page "),
-        body: stateData.when(
-            data: (data) => data == null
-                ? const SizedBox()
-                : Padding(
-                    padding: const EdgeInsets.only(left: 25, right: 25),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          CourseDetailThumbnail(
-                              courseItem:
-                                  data), //passing the data to the course item and this is displaying the image
-                          CourseDetailsIconText(
-                              courseItem:
-                                  data), // this container is to show the menu buttons
-                          CourseDetailDescription(courseItem: data),
-                          const CourseDetailGoBuyButton(),
-                          CourseDetailIncludes(courseItem: data)
-                        ]),
-                  ),
-            error: (error, tracestack) {
-              print(error.toString());
-              print(stateData.toString());
-              return const Center(
-                  child: Text("Error Loading Course details ..."));
-            },
-            loading: () => Center(child: CircularProgressIndicator())));
+      appBar: buildGlobalAppbar(title: "Course Detail Page "),
+      body: SingleChildScrollView(
+          child: stateData.when(
+              data: (data) => data == null
+                  ? const SizedBox()
+                  : Padding(
+                      padding: const EdgeInsets.only(left: 25, right: 25),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            CourseDetailThumbnail(
+                                courseItem:
+                                    data), //passing the data to the course item and this is displaying the image
+                            CourseDetailsIconText(
+                                courseItem:
+                                    data), // this container is to show the menu buttons
+                            CourseDetailDescription(courseItem: data),
+                            const CourseDetailGoBuyButton(),
+                            CourseDetailIncludes(courseItem: data),
+                            const LessonInfo(),
+                          ]),
+                    ),
+              error: (error, tracestack) {
+                print(error.toString());
+                print(stateData.toString());
+                return const Center(
+                    child: Text("Error Loading Course details ..."));
+              },
+              loading: () => Center(child: CircularProgressIndicator()))),
+    );
   }
 }

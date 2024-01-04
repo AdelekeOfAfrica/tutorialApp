@@ -23,4 +23,5 @@ class ImageRes {
   static const String videoDetail = "$_imageBase/video_detail.png";
   static const String fileDetail = "$_imageBase/file_detail.png";
   static const String downloadDetail = "$_imageBase/download_detail.png";
+  static const String arrowRight = "$_imageBase/arrow_right.png";
 }
