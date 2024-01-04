@@ -20,4 +20,7 @@ class ImageRes {
   static const String profileImage = "$_imageBase/default.png";
   static const String people = "$_imageBase/people.png";
   static const String star = "$_imageBase/star.png";
+  static const String videoDetail = "$_imageBase/video_detail.png";
+  static const String fileDetail = "$_imageBase/file_detail.png";
+  static const String downloadDetail = "$_imageBase/download_detail.png";
 }

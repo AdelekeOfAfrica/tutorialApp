@@ -9,7 +9,7 @@ import 'package:tutorialapp/common/widgets/app_shadow.dart';
 import 'package:tutorialapp/common/widgets/image_widget.dart';
 import 'package:tutorialapp/common/widgets/text_widgets.dart';
 import 'package:tutorialapp/pages/courseDetails/controller/course_Detail_controller.dart';
-import 'package:tutorialapp/pages/courseDetails/views/widgets/course_widget.dart';
+import 'package:tutorialapp/pages/courseDetails/views/widgets/course_detail_widget.dart';
 
 class CourseDetail extends ConsumerStatefulWidget {
   const CourseDetail({super.key});
@@ -40,14 +40,23 @@ class _CourseDetailState extends ConsumerState<CourseDetail> {
         body: stateData.when(
             data: (data) => data == null
                 ? const SizedBox()
-                : Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    CourseDetailThumbnail(
-                        courseItem:
-                            data), //passing the data to the course item and this is displaying the image
-                    CourseDetailsIconText(
-                        courseItem:
-                            data) // this container is to show the menu buttons
-                  ]),
+                : Padding(
+                    padding: const EdgeInsets.only(left: 25, right: 25),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          CourseDetailThumbnail(
+                              courseItem:
+                                  data), //passing the data to the course item and this is displaying the image
+                          CourseDetailsIconText(
+                              courseItem:
+                                  data), // this container is to show the menu buttons
+                          CourseDetailDescription(courseItem: data),
+                          const CourseDetailGoBuyButton(),
+                          CourseDetailIncludes(courseItem: data)
+                        ]),
+                  ),
             error: (error, tracestack) {
               print(error.toString());
               print(stateData.toString());
