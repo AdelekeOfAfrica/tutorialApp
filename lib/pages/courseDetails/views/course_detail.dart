@@ -31,41 +31,64 @@ class _CourseDetailState extends ConsumerState<CourseDetail> {
 
   @override
   Widget build(BuildContext context) {
-    var stateData = ref.watch(courseDetailControllerProvider(
+    var courseData = ref.watch(courseDetailControllerProvider(
         index:
             args.toInt())); //indexs has been passed in the CourseDetailProvider
-    print(stateData);
+    print(courseData);
+    var lessonData =
+        ref.watch(CourseLessonListControllerProvider(index: args.toInt()));
     return Scaffold(
       appBar: buildGlobalAppbar(title: "Course Detail Page "),
-      body: SingleChildScrollView(
-          child: stateData.when(
-              data: (data) => data == null
-                  ? const SizedBox()
-                  : Padding(
-                      padding: const EdgeInsets.only(left: 25, right: 25),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            CourseDetailThumbnail(
-                                courseItem:
-                                    data), //passing the data to the course item and this is displaying the image
-                            CourseDetailsIconText(
-                                courseItem:
-                                    data), // this container is to show the menu buttons
-                            CourseDetailDescription(courseItem: data),
-                            const CourseDetailGoBuyButton(),
-                            CourseDetailIncludes(courseItem: data),
-                            const LessonInfo(),
-                          ]),
-                    ),
-              error: (error, tracestack) {
-                print(error.toString());
-                print(stateData.toString());
-                return const Center(
-                    child: Text("Error Loading Course details ..."));
-              },
-              loading: () => Center(child: CircularProgressIndicator()))),
+      body: Padding(
+          padding: const EdgeInsets.only(left: 25, right: 25),
+          child: SingleChildScrollView(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  courseData.when(
+                      data: (data) => data == null
+                          ? const SizedBox()
+                          : Column(
+                              children: [
+                                CourseDetailThumbnail(
+                                    courseItem:
+                                        data), //passing the data to the course item and this is displaying the image
+                                CourseDetailsIconText(
+                                    courseItem:
+                                        data), // this container is to show the menu buttons
+                                CourseDetailDescription(courseItem: data),
+                                const CourseDetailGoBuyButton(),
+                                CourseDetailIncludes(courseItem: data),
+                              ],
+                            ),
+                      error: (error, tracestack) {
+                        print(error.toString());
+                        print(courseData.toString());
+                        return const Center(
+                            child: Text("Error Loading Course data ..."));
+                      },
+                      loading: () => Container(
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          )),
+                  //this second one is going to be used to pass lesson list
+                  lessonData.when(
+                      data: (data) => data == null
+                          ? const SizedBox()
+                          : LessonInfo(lessonData: data),
+                      error: (error, tracestack) {
+                        print(error.toString());
+                        print(courseData.toString());
+                        return const Center(
+                            child: Text("Error Loading Lesson data ..."));
+                      },
+                      loading: () => Center(
+                            child: CircularProgressIndicator(),
+                          )),
+                ]),
+          )),
     );
   }
 }

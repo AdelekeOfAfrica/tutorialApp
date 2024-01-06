@@ -72,6 +72,7 @@ class Text10Normal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(text,
+        overflow: TextOverflow.ellipsis,
         textAlign: TextAlign.center,
         style: TextStyle(color: color, fontSize: 10, fontWeight: fontWeight));
   }

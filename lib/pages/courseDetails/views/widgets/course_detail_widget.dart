@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tutorialapp/common/Models/course_entities.dart';
+import 'package:tutorialapp/common/Models/lesson_entities.dart';
 import 'package:tutorialapp/common/utilities/app_colors.dart';
 import 'package:tutorialapp/common/utilities/constants.dart';
 import 'package:tutorialapp/common/utilities/image_resources.dart';
@@ -174,47 +175,70 @@ class CourseInfo extends StatelessWidget {
 }
 
 class LessonInfo extends StatelessWidget {
-  const LessonInfo({super.key});
+  final List<LessonItem> lessonData;
+  const LessonInfo({super.key, required this.lessonData});
 
   @override
   Widget build(BuildContext context) {
+    print('my course lesson number ${lessonData.length}');
     return Container(
         margin: const EdgeInsets.only(top: 20),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const Text16Normal(
-              text: "Lesson List",
-              color: AppColors.primaryText,
-              textAlign: TextAlign.start,
-              fontWeight: FontWeight.bold),
-          const SizedBox(height: 20),
-          Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              width: 325,
-              height: 80,
-              decoration: appBoxShadow(
-                  radius: 10,
-                  sR: 2,
-                  bR: 3,
-                  color: Color.fromRGBO(255, 255, 255, 1)),
-              child: InkWell(
-                  onTap: () {},
-                  child: Row(children: [
-                    AppBoxDecorationImage(
-                        width: 60,
-                        height: 60,
-                        imagePath: "${AppConstants.IMAGE_UPLOADS_PATH}01.png"),
-                    SizedBox(width: 8),
-                    const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text13Normal(text: "This is first lesson"),
-                          Text10Normal(text: "This is description"),
-                        ]),
-                    Expanded(child: Container()),
-                    const AppImage(
-                        imagePath: ImageRes.arrowRight, width: 24, height: 24)
-                  ]))),
+          lessonData.isNotEmpty
+              ? const Text16Normal(
+                  text: "Lesson List",
+                  color: AppColors.primaryText,
+                  textAlign: TextAlign.start,
+                  fontWeight: FontWeight.bold)
+              : const Text16Normal(
+                  text: "Lesson list is empty",
+                  color: AppColors.primaryText,
+                  textAlign: TextAlign.start,
+                  fontWeight: FontWeight.bold),
+          ListView.builder(
+              shrinkWrap: true,
+              itemCount: lessonData.length,
+              itemBuilder: (_, index) {
+                //we are using itemBuilder index, because it is returing a list
+                return Container(
+                    margin: EdgeInsets.only(top: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    width: 325,
+                    height: 80,
+                    decoration: appBoxShadow(
+                        radius: 10,
+                        sR: 2,
+                        bR: 3,
+                        color: Color.fromRGBO(255, 255, 255, 1)),
+                    child: InkWell(
+                        onTap: () {},
+                        child: Row(children: [
+                          AppBoxDecorationImage(
+                              width: 60,
+                              height: 60,
+                              imagePath:
+                                  "${AppConstants.IMAGE_UPLOADS_PATH}${lessonData[index].thumbnail}"),
+                          SizedBox(width: 8),
+                          Expanded(
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text13Normal(
+                                      text: lessonData[index].name.toString()),
+                                  Text10Normal(
+                                      text: lessonData[index]
+                                          .description
+                                          .toString()),
+                                ]),
+                          ),
+                          Expanded(child: Container()),
+                          const AppImage(
+                              imagePath: ImageRes.arrowRight,
+                              width: 24,
+                              height: 24)
+                        ])));
+              })
         ]));
   }
 }
