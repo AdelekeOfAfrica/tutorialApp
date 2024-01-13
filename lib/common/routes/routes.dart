@@ -5,6 +5,7 @@ import 'package:tutorialapp/global.dart';
 import 'package:tutorialapp/pages/application/application.dart';
 import 'package:tutorialapp/pages/courseDetails/views/course_detail.dart';
 import 'package:tutorialapp/pages/home/view/home.dart';
+import 'package:tutorialapp/pages/lesson_detail/view/lesson_detail.dart';
 import 'package:tutorialapp/pages/sigin_in/sign_in.dart';
 import 'package:tutorialapp/pages/sign_up/sign_up.dart';
 import 'package:tutorialapp/pages/welcome/welcome.dart';
@@ -19,6 +20,7 @@ class AppPages {
       RouteEntity(path: AppRoutesNames.Home, page: const Home()),
       RouteEntity(
           path: AppRoutesNames.Course_Details, page: const CourseDetail()),
+      RouteEntity(path: AppRoutesNames.Lesson_Details, page: LessonDetail()),
     ];
   }
 

@@ -110,3 +110,27 @@ class LessonVideoItem {
         "thumbnail": thumbnail,
       };
 }
+
+//this is used to play our actual video from the server
+
+class LessonVideo {
+  final List<LessonVideoItem> lessonItem;
+  final Future<void>? initializeVideoPlayer;
+  final bool isPlay;
+
+  LessonVideo(
+      {this.lessonItem = const <LessonVideoItem>[],
+      this.initializeVideoPlayer,
+      this.isPlay = false});
+
+  LessonVideo copyWith(
+      {List<LessonVideoItem>? lessonItem,
+      Future<void>? initializeVideoPlayer,
+      bool? isPlay}) {
+    return LessonVideo(
+        lessonItem: lessonItem ?? this.lessonItem,
+        initializeVideoPlayer:
+            initializeVideoPlayer ?? this.initializeVideoPlayer,
+        isPlay: isPlay ?? this.isPlay);
+  }
+}

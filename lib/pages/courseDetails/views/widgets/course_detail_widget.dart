@@ -211,7 +211,10 @@ class LessonInfo extends StatelessWidget {
                         bR: 3,
                         color: Color.fromRGBO(255, 255, 255, 1)),
                     child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).pushNamed("/lesson_details",
+                              arguments: {"id": lessonData[index].id!});
+                        },
                         child: Row(children: [
                           AppBoxDecorationImage(
                               width: 60,
